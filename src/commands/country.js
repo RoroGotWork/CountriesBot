@@ -1,6 +1,6 @@
 const axios = require("axios")
 module.exports = {
-    name: "country",
+    name: "country", 
     run: async (client, message, args) => {
 
         console.log(args.length)
@@ -11,13 +11,13 @@ module.exports = {
 
         axiosData = await axios.get("https://restcountries.com/v3.1/name/france")
         country = axiosData.data[0]
+        console.log(axios.AxiosHeaders.status)
         console.log(country.population)
 
         /*
             Things : 
             country.name.common, country.population, country.region, country.capital, country.flags.png
         */
-
 
         const countryName = args[1]
         

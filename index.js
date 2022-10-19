@@ -1,9 +1,10 @@
 const BotClient = require("./src/structure/bot")
 
 const config = require("./config.json")
-const token = config.token
 const prefix = config.prefix
 
+require("dotenv").config()
+const token = process.env.TOKEN 
 
 
 const client = new BotClient(token, prefix)
