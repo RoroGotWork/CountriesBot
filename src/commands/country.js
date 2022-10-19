@@ -1,25 +1,36 @@
-const axios = require("axios")
+const axios = require('axios')
 module.exports = {
-    name: "country", 
+    name: 'country', 
     run: async (client, message, args) => {
 
-        console.log(args.length)
+        
+
         if(args.length == 1){
-            await message.reply("Please enter country name")
+            await message.reply('Please enter country name')
             return
         }
 
-        axiosData = await axios.get("https://restcountries.com/v3.1/name/france")
-        country = axiosData.data[0]
-        console.log(axios.AxiosHeaders.status)
-        console.log(country.population)
 
         /*
-            Things : 
-            country.name.common, country.population, country.region, country.capital, country.flags.png
+            Props to use : 
+            country.name.common, country.name.official, country.population, country.region, country.capital, country.flags.png
         */
 
-        const countryName = args[1]
+        const countryName = args.splice(1, args.length + 1).join(" ")
+        
+        
+
+        try {
+            axiosData = await axios.get(`https://restcountries.com/v3.1/name/${countryName}`)
+
+        if(axiosData.data == undefined){
+            return
+        }
+        country = axiosData.data[0]
+
+        } catch (error) {
+            message.reply("Country not found")
+        }
         
     }
 }

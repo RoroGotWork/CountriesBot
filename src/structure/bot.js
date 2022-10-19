@@ -1,6 +1,6 @@
-const {Client, GatewayIntentBits, Collection} = require("discord.js")
+const {Client, GatewayIntentBits, Collection} = require('discord.js')
 
-const fs =  require("fs")
+const fs =  require('fs')
 
 module.exports = class BotClient extends Client {
     constructor(token, prefix){
@@ -18,13 +18,13 @@ module.exports = class BotClient extends Client {
     }
 
     registerEvents(){
-        fs.readdirSync("./src/events")
-            .filter((file) => file.endsWith(".js"))
+        fs.readdirSync('./src/events')
+            .filter((file) => file.endsWith('.js'))
             .forEach((file) => {
-                const event = require("../events/" + file)
+                const event = require(`../events/${file}`)
 
-                if(!event.name || typeof event.name !== "string"){
-                    console.log("Event from file " + file + " couldn't have been loaded")
+                if(!event.name || typeof event.name !== 'string'){
+                    console.log(`Event from file ${file} couldn't have been loaded`)
                     return
                 }
 
@@ -34,24 +34,24 @@ module.exports = class BotClient extends Client {
                     this.on(event.name, (...args) => event.run(this, ...args))
                 }
 
-                console.log("Event " + event.name + " loaded")
+                console.log(`Event ${event.name} loaded`)
             })
     }
 
 
     registerCommands(){
-        fs.readdirSync("./src/commands")
-            .filter((file) => file.endsWith(".js"))
+        fs.readdirSync('./src/commands')
+            .filter((file) => file.endsWith('.js'))
             .forEach((file) => {
-                const command = require("../commands/" + file)
+                const command = require(`../commands/${file}`)
 
                 if(!command.name || typeof command.name !== "string"){
-                    console.log("Command from " + file.slice(0, file.length - 3) + " not loaded")
+                    console.log(`Command from ${file.slice(0, file.length - 3)} not loaded`)
                     return;
                 }
                 
                 this.commands.set(command.name, command)
-                console.log(command.name + " command loaded")
+                console.log(`${command.name} command loaded`)
 
             })
 
