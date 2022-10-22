@@ -34,7 +34,7 @@ module.exports = {
         const region = country.region
         const population = country.population
         const flag = country.flags.png
-        console.log(flag)
+        
 
 
         const countryEmbed = new CountryEmbed(name, officialName, capital, region, population, flag)
