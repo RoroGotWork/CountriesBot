@@ -12,7 +12,7 @@ module.exports = class CountryNotFoundEmbed extends EmbedBuilder{
 
 
 
-    getFileAttachment(){
+    getFilesAttachment(){
         let list = []
         list.push(this.errorImg)
 
