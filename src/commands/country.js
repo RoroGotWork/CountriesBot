@@ -1,5 +1,7 @@
 const axios = require('axios')
 const CountryEmbed = require('../embeds/countryEmbed')
+const CountryNotFoundEmbed = require('../embeds/countryNotFoundEmbed')
+
 module.exports = {
     name: 'country', 
     run: async (client, message, args) => {
@@ -24,7 +26,7 @@ module.exports = {
         try {
             axiosData = await axios.get(`https://restcountries.com/v3.1/name/${countryName}`)
 
-        country = axiosData.data[0]
+        const country = axiosData.data[0]
 
         const name = country.name.common
         const officialName = country.name.official
@@ -35,11 +37,13 @@ module.exports = {
         console.log(flag)
 
 
-        embed = new CountryEmbed(name, officialName, capital, region, population, flag)
-        message.channel.send({embeds : [embed]})
+        const countryEmbed = new CountryEmbed(name, officialName, capital, region, population, flag)
+        message.channel.send({embeds : [countryEmbed]})
 
         } catch (error) {
-            message.reply('Country not found')
+            const countryNotFoundEmbed = new CountryNotFoundEmbed(countryName)
+
+            message.channel.send({embeds: [countryNotFoundEmbed], files : countryNotFoundEmbed.getFileAttachement()})
         } 
         
     }
