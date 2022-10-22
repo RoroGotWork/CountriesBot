@@ -43,7 +43,7 @@ module.exports = {
         } catch (error) {
             const countryNotFoundEmbed = new CountryNotFoundEmbed(countryName)
 
-            message.channel.send({embeds: [countryNotFoundEmbed], files : countryNotFoundEmbed.getFileAttachement()})
+            message.channel.send({embeds: [countryNotFoundEmbed], files : countryNotFoundEmbed.getFileAttachment()})
         } 
         
     }
