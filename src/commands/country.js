@@ -30,14 +30,14 @@ module.exports = {
 
         const name = country.name.common
         const officialName = country.name.official
-        const capital = country.capital.join(", ")
+        const capitals = country.capital.join(", ")
         const region = country.region
         const population = country.population
         const flag = country.flags.png
         
 
 
-        const countryEmbed = new CountryEmbed(name, officialName, capital, region, population, flag)
+        const countryEmbed = new CountryEmbed(name, officialName, capitals, region, population, flag)
         message.channel.send({embeds : [countryEmbed]})
 
         } catch (error) {
