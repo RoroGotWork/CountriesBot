@@ -26,19 +26,19 @@ module.exports = {
         try {
             axiosData = await axios.get(`https://restcountries.com/v3.1/name/${countryName}`)
 
-        const country = axiosData.data[0]
+            const country = axiosData.data[0]
 
-        const name = country.name.common
-        const officialName = country.name.official
-        const capitals = country.capital.join(", ")
-        const region = country.region
-        const population = country.population
-        const flag = country.flags.png
-        
+            const name = country.name.common
+            const officialName = country.name.official
+            const capitals = country.capital.join(", ")
+            const region = country.region
+            const population = country.population
+            const flag = country.flags.png
 
 
-        const countryEmbed = new CountryEmbed(name, officialName, capitals, region, population, flag)
-        message.channel.send({embeds : [countryEmbed]})
+
+            const countryEmbed = new CountryEmbed(name, officialName, capitals, region, population, flag)
+            message.channel.send({embeds : [countryEmbed]})
 
         } catch (error) {
             const countryNotFoundEmbed = new CountryNotFoundEmbed(countryName)
